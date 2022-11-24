@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class main {
 
-    public static int menu() {
+    public static int menu(double carrinho) {
         int option = -1;
                 //Solicita a entrada para o usuário
                 try {String text = JOptionPane.showInputDialog (
@@ -17,21 +17,28 @@ public class main {
                     " \nDigite uma opção: ", "Cardápio",
                     JOptionPane.PLAIN_MESSAGE);
                     
-                    if(text == null) {
-                        option = 0;
+                    if ((text != null && Integer.parseInt(text) >= 0) && (Integer.parseInt(text) <= 9)) {
+                        option = Integer.parseInt(text);
                     }
 
-                    else
-                    option = Integer.parseInt(text);
-                }
-                                                      
+                    else if(text == null ){
+                        option = 0;
+                    }
+                    
+                    else if((Integer.parseInt(text) < 0) || (Integer.parseInt(text) > 9)){
+                        JOptionPane.showMessageDialog (null, "O menu só funciona com a inserção de um valor númerico válido.", "Erro",
+                                JOptionPane.ERROR_MESSAGE); 
+
+                                return -1;
+                        
+                    }
+                }                                                   
                     //Tratamento de erro, caso o usuário não insira um valor numérico
                         catch(HeadlessException | NumberFormatException e) {
                             JOptionPane.showMessageDialog (null, "O menu só funciona com a inserção de um valor númerico válido.", "Erro",
-                                JOptionPane.ERROR_MESSAGE); 
-
+                                JOptionPane.ERROR_MESSAGE);                   
                             }  
-
+                
                 return option;
     }
 
@@ -46,9 +53,9 @@ public class main {
 
         while(option != 0) {
         
-        option = menu();
+        option = menu(carrinho);
     
-                switch(option){
+                switch(option){ 
                 
                     case 0: 
                     if(carrinho > 0) {
@@ -102,7 +109,7 @@ public class main {
                 JOptionPane.showMessageDialog (null, "Valor atual: R$ " + (valorFormatado), "Carrinho",
                 JOptionPane.WARNING_MESSAGE); break;
                 
-                default: option = 0;
+                default: option = -1;
                 }     
         
             }
