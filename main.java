@@ -13,11 +13,12 @@ public class main {
                     " \n\n0. Sair \n1. Pizza de Abobrinha R$ 15,45 \n2. Suco de Cenoura R$  6,35" +
                     " \n3. Empada de Frango R$ 17,59 \n4. Sorvete de Abacaxi R$ 12,10 \n5. Risoto de limão R$ 37,95" +
                     " \n6. Porção de Batata-frita  R$ 18,25 \n7. Cone de Oreo R$ 12,69 \n8. Água R$  2,25" +
-                    " \n9. Consultar Carrinho\n" +
+                    " \n9. Consultar Carrinho" +
+                    "\n10. Limpar Carrinho\n" +
                     " \nDigite uma opção: ", "Cardápio",
                     JOptionPane.PLAIN_MESSAGE);
                     
-                    if ((text != null && Integer.parseInt(text) >= 0) && (Integer.parseInt(text) <= 9)) {
+                    if ((text != null && Integer.parseInt(text) >= 0) && (Integer.parseInt(text) <= 10)) {
                         option = Integer.parseInt(text);
                     }
 
@@ -25,7 +26,7 @@ public class main {
                         option = 0;
                     }
                     
-                    else if((Integer.parseInt(text) < 0) || (Integer.parseInt(text) > 9)){
+                    else if((Integer.parseInt(text) < 0) || (Integer.parseInt(text) > 10)){
                         JOptionPane.showMessageDialog (null, "O menu só funciona com a inserção de um valor númerico válido.", "Erro",
                                 JOptionPane.ERROR_MESSAGE); 
 
@@ -103,11 +104,14 @@ public class main {
 
                 case 8: carrinho += 2.25; break;
 
-                case 9:
+                case 9: //consulta valor a pagar
                 valorFormatado = decimal.format(carrinho);
         
                 JOptionPane.showMessageDialog (null, "Valor atual: R$ " + (valorFormatado), "Carrinho",
                 JOptionPane.WARNING_MESSAGE); break;
+
+                case 10: //Limpa o carrinho
+                carrinho = 0; break;
                 
                 default: option = -1;
                 }     
